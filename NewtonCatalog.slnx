@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="NewtonCatalog.Api.Tests/NewtonCatalog.Api.Tests.csproj" />
   <Project Path="NewtonCatalog.Api/NewtonCatalog.Api.csproj" />
 </Solution>
