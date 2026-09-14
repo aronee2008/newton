@@ -90,6 +90,7 @@ components:
       enum: [Action, Adventure, Rpg, Shooter, Strategy, Sports, Racing, Puzzle, Simulation, Platformer, Fighting, Horror]
 
     Game:
+      additionalProperties: false
       type: object
       required: [id, title, developer, platform, genre, releaseDate, rating, price]
       properties:
@@ -120,6 +121,7 @@ components:
           minimum: 0
 
     UpdateGameRequest:
+      additionalProperties: false
       type: object
       required: [title, developer, platform, genre, releaseDate, rating, price]
       properties:

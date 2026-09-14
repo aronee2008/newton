@@ -29,11 +29,6 @@ namespace NewtonCatalog.Api.Data.Migrations
                 {
                     table.PrimaryKey("PK_Games", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Games_Title",
-                table: "Games",
-                column: "Title");
         }
 
         /// <inheritdoc />

@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using NewtonCatalog.Api.Domain;
+using NewtonCatalog.Api.Generated;
 
 namespace NewtonCatalog.Api.Data;
 
 public class CatalogueDbContext(DbContextOptions<CatalogueDbContext> options) : DbContext(options)
 {
-    public DbSet<VideoGame> Games => Set<VideoGame>();
+    public DbSet<Game> Games => Set<Game>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

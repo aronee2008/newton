@@ -12,7 +12,7 @@ using NewtonCatalog.Api.Data;
 namespace NewtonCatalog.Api.Data.Migrations
 {
     [DbContext(typeof(CatalogueDbContext))]
-    [Migration("20260913172216_SM1_InitialCreate")]
+    [Migration("20260914005713_SM1_InitialCreate")]
     partial class SM1_InitialCreate
     {
         /// <inheritdoc />
@@ -25,49 +25,55 @@ namespace NewtonCatalog.Api.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NewtonCatalog.Api.Domain.VideoGame", b =>
+            modelBuilder.Entity("NewtonCatalog.Api.Generated.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasJsonPropertyName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Developer")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasJsonPropertyName("developer");
 
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasJsonPropertyName("genre");
 
                     b.Property<string>("Platform")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasJsonPropertyName("platform");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasJsonPropertyName("price");
 
                     b.Property<int>("Rating")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasJsonPropertyName("rating");
 
                     b.Property<DateOnly>("ReleaseDate")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasJsonPropertyName("releaseDate");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasJsonPropertyName("title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Title");
-
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 #pragma warning restore 612, 618
         }
