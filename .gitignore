@@ -19,3 +19,6 @@ Thumbs.db
 
 # Secrets
 .env
+
+# Generated from the OpenAPI contract at build time
+NewtonCatalog.Api/Generated/
