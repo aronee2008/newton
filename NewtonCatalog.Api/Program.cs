@@ -8,20 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
-builder.Services.AddDbContext<CatalogueDbContext>(options =>
+builder.Services.AddDbContext<CatalogDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("Default"),
         sql => sql.EnableRetryOnFailure()));
-builder.Services.AddScoped<IVideoGameRepository, VideoGameRepository>();
-builder.Services.AddScoped<IVideoGameService, VideoGameService>();
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IGameService, GameService>();
 
 var app = builder.Build();
 
 await using (var scope = app.Services.CreateAsyncScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<CatalogueDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
     await db.Database.MigrateAsync();
-    await DataMigrationRunner.RunAsync(db);
+    await DM1_SeedInitialCatalog.MigrateAsync(db);
 }
 
 app.UseExceptionHandler();

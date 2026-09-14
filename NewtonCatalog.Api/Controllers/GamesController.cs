@@ -5,7 +5,7 @@ using NewtonCatalog.Api.Services;
 namespace NewtonCatalog.Api.Controllers;
 
 [ApiController]
-public class GamesController(IVideoGameService games) : GamesControllerBase
+public class GamesController(IGameService games) : GamesControllerBase
 {
     public override async Task<ActionResult<ICollection<Game>>> GetAll(CancellationToken cancellationToken) =>
         await games.GetAllAsync(cancellationToken);

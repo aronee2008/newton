@@ -1,0 +1,60 @@
+<h1 class="h3 mb-3">Edit game</h1>
+
+@if (error(); as message) {
+  <ngb-alert type="danger" [dismissible]="false">{{ message }}</ngb-alert>
+}
+
+<form [formGroup]="form" (ngSubmit)="save()" class="row g-3">
+  <div class="col-md-6">
+    <label for="title" class="form-label">Title</label>
+    <input id="title" class="form-control" formControlName="title" [class.is-invalid]="isInvalid('title')" />
+    <div class="invalid-feedback">Title is required and at most 100 characters.</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="developer" class="form-label">Developer</label>
+    <input id="developer" class="form-control" formControlName="developer" [class.is-invalid]="isInvalid('developer')" />
+    <div class="invalid-feedback">Developer is required and at most 100 characters.</div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="platform" class="form-label">Platform</label>
+    <select id="platform" class="form-select" formControlName="platform">
+      @for (platform of platforms; track platform) {
+        <option [value]="platform">{{ platform }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="genre" class="form-label">Genre</label>
+    <select id="genre" class="form-select" formControlName="genre">
+      @for (genre of genres; track genre) {
+        <option [value]="genre">{{ genre }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="releaseDate" class="form-label">Release date</label>
+    <input id="releaseDate" type="date" class="form-control" formControlName="releaseDate" [class.is-invalid]="isInvalid('releaseDate')" />
+    <div class="invalid-feedback">Release date is required.</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="rating" class="form-label">Rating (0-100)</label>
+    <input id="rating" type="number" class="form-control" formControlName="rating" [class.is-invalid]="isInvalid('rating')" />
+    <div class="invalid-feedback">Rating must be between 0 and 100.</div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="price" class="form-label">Price (USD)</label>
+    <input id="price" type="number" step="0.01" class="form-control" formControlName="price" [class.is-invalid]="isInvalid('price')" />
+    <div class="invalid-feedback">Price must be 0 or more.</div>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary me-2">Save</button>
+    <a routerLink="/games" class="btn btn-outline-secondary">Cancel</a>
+  </div>
+</form>

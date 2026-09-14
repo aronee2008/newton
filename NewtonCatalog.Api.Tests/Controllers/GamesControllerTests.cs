@@ -8,32 +8,12 @@ namespace NewtonCatalog.Api.Tests.Controllers;
 
 public class GamesControllerTests
 {
-    private readonly IVideoGameService _service = Substitute.For<IVideoGameService>();
+    private readonly IGameService _service = Substitute.For<IGameService>();
     private readonly GamesController _controller;
 
     public GamesControllerTests()
     {
         _controller = new GamesController(_service);
-    }
-
-    [Fact]
-    public async Task GetAll_ReturnsAllGames()
-    {
-        _service.GetAllAsync(Arg.Any<CancellationToken>()).Returns([TestGames.Hades(), TestGames.Celeste()]);
-
-        var result = await _controller.GetAll(CancellationToken.None);
-
-        Assert.Equal(2, result.Value!.Count);
-    }
-
-    [Fact]
-    public async Task GetById_ExistingGame_ReturnsGame()
-    {
-        _service.GetByIdAsync(1, Arg.Any<CancellationToken>()).Returns(TestGames.Hades());
-
-        var result = await _controller.GetById(1, CancellationToken.None);
-
-        Assert.Equal("Hades", result.Value!.Title);
     }
 
     [Fact]

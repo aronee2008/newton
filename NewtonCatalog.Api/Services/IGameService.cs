@@ -2,7 +2,7 @@ using NewtonCatalog.Api.Generated;
 
 namespace NewtonCatalog.Api.Services;
 
-public interface IVideoGameService
+public interface IGameService
 {
     Task<List<Game>> GetAllAsync(CancellationToken ct);
 

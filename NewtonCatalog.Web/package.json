@@ -1,0 +1,31 @@
+{
+  "name": "newton-catalog-web",
+  "version": "0.0.0",
+  "scripts": {
+    "generate:api": "npx -y openapi-typescript@7.13.0 ../contracts/newton-catalog.openapi.yaml -o src/app/games/api.ts --enum-values",
+    "prestart": "npm run generate:api",
+    "start": "ng serve",
+    "prebuild": "npm run generate:api",
+    "build": "ng build"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^21.0.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "rxjs": "~7.8.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.1.8",
+    "@angular/cli": "^22.1.8",
+    "@angular/compiler-cli": "^22.1.0",
+    "@angular/localize": "^22.1.0",
+    "typescript": "~6.0.2"
+  }
+}

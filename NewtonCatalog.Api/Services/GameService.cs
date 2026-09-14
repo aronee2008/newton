@@ -3,7 +3,7 @@ using NewtonCatalog.Api.Repositories;
 
 namespace NewtonCatalog.Api.Services;
 
-public class VideoGameService(IVideoGameRepository repository) : IVideoGameService
+public class GameService(IGameRepository repository) : IGameService
 {
     public Task<List<Game>> GetAllAsync(CancellationToken ct) =>
         repository.GetAllAsync(ct);

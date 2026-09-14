@@ -4,7 +4,7 @@ using NewtonCatalog.Api.Generated;
 
 namespace NewtonCatalog.Api.Repositories;
 
-public class VideoGameRepository(CatalogueDbContext db) : IVideoGameRepository
+public class GameRepository(CatalogDbContext db) : IGameRepository
 {
     public Task<List<Game>> GetAllAsync(CancellationToken ct) =>
         db.Games.AsNoTracking().OrderBy(g => g.Title).ToListAsync(ct);

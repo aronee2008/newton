@@ -1,24 +1,15 @@
-# .NET
 bin/
 obj/
-*.user
 .dotnet/
 TestResults/
-
-# Angular
 node_modules/
 dist/
 .angular/
-
-# IDE / OS
 .idea/
 .vs/
 .vscode/
-.DS_Store
-Thumbs.db
-
-# Secrets
 .env
 
 # Generated from the OpenAPI contract at build time
 NewtonCatalog.Api/Generated/
+NewtonCatalog.Web/src/app/games/api.ts
