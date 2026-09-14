@@ -6,7 +6,8 @@
     "prestart": "npm run generate:api",
     "start": "ng serve",
     "prebuild": "npm run generate:api",
-    "build": "ng build"
+    "build": "ng build",
+    "test": "ng test --watch=false"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +27,8 @@
     "@angular/cli": "^22.1.8",
     "@angular/compiler-cli": "^22.1.0",
     "@angular/localize": "^22.1.0",
-    "typescript": "~6.0.2"
+    "jsdom": "^28.1.0",
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.11"
   }
 }

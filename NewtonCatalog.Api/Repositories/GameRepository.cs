@@ -14,6 +14,7 @@ public class GameRepository(CatalogDbContext db) : IGameRepository
 
     public Task UpdateAsync(Game game, UpdateGameRequest changes, CancellationToken ct)
     {
+        // Copies properties by name; the request has no Id, so the key cannot change.
         db.Entry(game).CurrentValues.SetValues(changes);
         return db.SaveChangesAsync(ct);
     }

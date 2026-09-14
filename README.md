@@ -1,10 +1,10 @@
 # Newton Catalog
 
-A two-page video game catalogue: a browse page and an edit page.
+A two-page video game catalog: a browse page and an edit page.
 
 - Backend: ASP.NET Core 10, EF Core 10 (Code First, SQL Server)
 - Frontend: Angular 22, Angular Router, ng-bootstrap / Bootstrap
-- Tests: xUnit
+- Tests: xUnit (backend), Vitest (frontend)
 
 ## How it fits together
 
@@ -35,6 +35,8 @@ Database: `SM1_InitialCreate` (schema migration) and `DM1_SeedInitialCatalog` (d
 - SQL Server: LocalDB (`(localdb)\MSSQLLocalDB`, installed with Visual Studio) or SQL Server Express.
   For Express, change `ConnectionStrings:Default` in `NewtonCatalog.Api/appsettings.Development.json`.
 
+`global.json` also accepts an SDK in a local `.dotnet` folder (for machines without admin rights); with a normal .NET 10 install it is ignored.
+
 ## Run
 
 API (creates the database, applies the migration, seeds 100 games):
@@ -58,11 +60,22 @@ Open http://localhost:4200. The dev server proxies `/api` to the API (`proxy.con
 
 ## Tests
 
+Backend (xUnit):
+
 ```
 dotnet test
 ```
 
 Service tests run against EF Core's InMemory provider, controller tests use NSubstitute, and the contract validation tests check that the yaml constraints became `[Required]`, `[StringLength]` and `[Range]` attributes on the generated DTO.
+
+Frontend (Vitest):
+
+```
+cd NewtonCatalog.Web
+npm test
+```
+
+Covers the HTTP service, the list paging and the edit form (load, validation, save).
 
 ## Changing the API
 
@@ -72,7 +85,7 @@ Service tests run against EF Core's InMemory provider, controller tests use NSub
 4. If a DTO field changed shape, add a schema migration: `dotnet tool restore` once, then
    `dotnet ef migrations add SM2_Name --project NewtonCatalog.Api -o Data/Migrations` and drop the timestamp prefix from the two new file names.
 
-`generate:api` runs openapi-typescript through `npx` rather than as a dev dependency because its declared peer range stops at TypeScript 5 while Angular 22 uses TypeScript 6.
+`generate:api` runs openapi-typescript through `npx` rather than as a dev dependency because its declared peer range stops at TypeScript 5 while Angular 22 uses TypeScript 6, so the first `npm start` or `npm run build` needs network access.
 
 ## Project layout
 

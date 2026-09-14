@@ -9,7 +9,7 @@ paths:
       operationId: Games_GetAll
       responses:
         '200':
-          description: All games in the catalogue
+          description: All games in the catalog
           content:
             application/json:
               schema:
@@ -80,6 +80,7 @@ components:
       enum: [Action, Adventure, Rpg, Shooter, Strategy, Sports, Racing, Puzzle, Simulation, Platformer, Fighting, Horror]
 
     Game:
+      # No extra properties: the generated class is also the EF entity, and an AdditionalProperties dictionary cannot be mapped
       additionalProperties: false
       type: object
       required: [id, title, developer, platform, genre, releaseDate, rating, price]

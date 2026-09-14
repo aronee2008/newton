@@ -32,6 +32,9 @@
             "buildTarget": "newton-catalog-web:build:development",
             "proxyConfig": "proxy.conf.json"
           }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
         }
       }
     }

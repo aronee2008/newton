@@ -1,5 +1,9 @@
 <h1 class="h3 mb-3">Games</h1>
 
+@if (error(); as message) {
+  <ngb-alert type="danger" [dismissible]="false">{{ message }}</ngb-alert>
+}
+
 <table class="table table-striped">
   <thead>
     <tr>
