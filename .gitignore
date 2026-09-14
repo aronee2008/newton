@@ -1,60 +1,21 @@
-# ---------------------------------------------------------------------------
-# .NET / ASP.NET Core
-# ---------------------------------------------------------------------------
+# .NET
 bin/
 obj/
-[Dd]ebug/
-[Rr]elease/
-publish/
 *.user
-*.suo
-*.userprefs
-*.swp
-TestResults/
-coverage/
-*.coverage
-*.trx
 .dotnet/
-artifacts/
+TestResults/
 
-# Local secrets and environment overrides (never commit)
-appsettings.*.local.json
-*.pfx
-.env
-.env.*
-!.env.example
-
-# ---------------------------------------------------------------------------
-# Angular / Node
-# ---------------------------------------------------------------------------
+# Angular
 node_modules/
 dist/
 .angular/
-.nx/
-npm-debug.log*
-yarn-error.log*
-*.tsbuildinfo
 
-# ---------------------------------------------------------------------------
-# IDEs and editors
-# ---------------------------------------------------------------------------
-# JetBrains Rider / WebStorm
+# IDE / OS
 .idea/
-*.sln.iml
-# Visual Studio
 .vs/
-*.vsp
-*.vspx
-# VS Code (keep shared settings, ignore personal ones)
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/tasks.json
-
-# ---------------------------------------------------------------------------
-# OS
-# ---------------------------------------------------------------------------
+.vscode/
 .DS_Store
 Thumbs.db
-desktop.ini
+
+# Secrets
+.env

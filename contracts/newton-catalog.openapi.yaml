@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Newton Catalog API
+  version: 1.0.0
+  description: >
+    Video game catalogue. This document is the contract: the server DTOs and controller
+    base are generated from it with NSwag, and the Angular types with openapi-typescript.
+
+paths:
+  /api/games:
+    get:
+      tags: [Games]
+      operationId: Games_GetAll
+      summary: List all games
+      responses:
+        '200':
+          description: All games in the catalogue
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+
+  /api/games/{id}:
+    parameters:
+      - $ref: '#/components/parameters/GameId'
+    get:
+      tags: [Games]
+      operationId: Games_GetById
+      summary: Get a single game
+      responses:
+        '200':
+          description: The requested game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [Games]
+      operationId: Games_Update
+      summary: Update a game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGameRequest'
+      responses:
+        '204':
+          description: Updated
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  parameters:
+    GameId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+
+  responses:
+    NotFound:
+      description: No game with that id
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ValidationError:
+      description: The request body failed validation
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ValidationProblemDetails'
+
+  schemas:
+    Platform:
+      type: string
+      enum: [Pc, PlayStation4, PlayStation5, XboxOne, XboxSeriesX, NintendoSwitch, Mobile]
+
+    Genre:
+      type: string
+      enum: [Action, Adventure, Rpg, Shooter, Strategy, Sports, Racing, Puzzle, Simulation, Platformer, Fighting, Horror]
+
+    Game:
+      type: object
+      required: [id, title, developer, platform, genre, releaseDate, rating, price]
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          maxLength: 100
+        developer:
+          type: string
+          maxLength: 100
+        platform:
+          $ref: '#/components/schemas/Platform'
+        genre:
+          $ref: '#/components/schemas/Genre'
+        releaseDate:
+          type: string
+          format: date
+        rating:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+
+    UpdateGameRequest:
+      type: object
+      required: [title, developer, platform, genre, releaseDate, rating, price]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 100
+        developer:
+          type: string
+          minLength: 1
+          maxLength: 100
+        platform:
+          $ref: '#/components/schemas/Platform'
+        genre:
+          $ref: '#/components/schemas/Genre'
+        releaseDate:
+          type: string
+          format: date
+        rating:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+
+    ProblemDetails:
+      type: object
+      description: RFC 7807 problem details, as produced by ASP.NET Core
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: true
+
+    ValidationProblemDetails:
+      allOf:
+        - $ref: '#/components/schemas/ProblemDetails'
+        - type: object
+          properties:
+            errors:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  type: string

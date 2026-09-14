@@ -1,0 +1,23 @@
+{
+  "runtime": "Net100",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "../contracts/newton-catalog.openapi.yaml"
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpController": {
+      "controllerStyle": "Abstract",
+      "useActionResultType": true,
+      "useCancellationToken": true,
+      "generateModelValidationAttributes": true,
+      "namespace": "NewtonCatalog.Api.Generated",
+      "jsonLibrary": "SystemTextJson",
+      "dateType": "System.DateOnly",
+      "generateNullableReferenceTypes": true,
+      "generateJsonMethods": false,
+      "excludedTypeNames": ["ProblemDetails", "ValidationProblemDetails"],
+      "output": "Generated/NewtonCatalogApi.g.cs"
+    }
+  }
+}

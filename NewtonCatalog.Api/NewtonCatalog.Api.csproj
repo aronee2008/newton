@@ -4,14 +4,23 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApiContract>..\contracts\newton-catalog.openapi.yaml</ApiContract>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12" PrivateAssets="all" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.12" />
+    <PackageReference Include="NSwag.MSBuild" Version="14.7.1" PrivateAssets="all" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(ApiContract)" Link="openapi.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Contract-first: regenerate DTOs and the controller base whenever the OpenAPI document changes. -->
+  <Target Name="GenerateApiFromContract" BeforeTargets="CoreCompile" Inputs="$(ApiContract);nswag.json" Outputs="Generated\NewtonCatalogApi.g.cs">
+    <Exec Command="$(NSwagExe_Net100) run nswag.json" />
+  </Target>
 
 </Project>
